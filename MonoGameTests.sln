@@ -5,6 +5,8 @@ VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ponga", "Ponga\Ponga.csproj", "{C2C08850-2FBF-4F3E-A34A-90B0B3652580}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EscapeWok", "EscapeWok\EscapeWok.csproj", "{CF1AD0B6-87A7-4965-AE0E-3F1D28CA5C16}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{C2C08850-2FBF-4F3E-A34A-90B0B3652580}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2C08850-2FBF-4F3E-A34A-90B0B3652580}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2C08850-2FBF-4F3E-A34A-90B0B3652580}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF1AD0B6-87A7-4965-AE0E-3F1D28CA5C16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF1AD0B6-87A7-4965-AE0E-3F1D28CA5C16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF1AD0B6-87A7-4965-AE0E-3F1D28CA5C16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF1AD0B6-87A7-4965-AE0E-3F1D28CA5C16}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

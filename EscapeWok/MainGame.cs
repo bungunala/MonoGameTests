@@ -1,8 +1,9 @@
-﻿using EscapeWok.States.Base;
+﻿using EscapeWok.Enum;
+using EscapeWok.States;
+using EscapeWok.States.Base;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
 
 namespace EscapeWok
 {
@@ -13,9 +14,11 @@ namespace EscapeWok
 
         private RenderTarget2D _renderTarget;
         private Rectangle _renderScaleRectangle;
+
         private BaseGameState _currentGameState;
-        private const int DESIGNED_RESOLUTION_WIDTH = 800;
-        private const int DESIGNED_RESOLUTION_HEIGHT = 600;
+
+        private const int DESIGNED_RESOLUTION_WIDTH = 1920;
+        private const int DESIGNED_RESOLUTION_HEIGHT = 1080;
         private const float DESIGNED_RESOLUTION_ASPECT_RATIO = DESIGNED_RESOLUTION_WIDTH / (float)DESIGNED_RESOLUTION_HEIGHT;
 
         public MainGame()
@@ -29,8 +32,8 @@ namespace EscapeWok
         {
             // TODO: Add your initialization logic here            
 
-            _graphics.PreferredBackBufferWidth = 1024;
-            _graphics.PreferredBackBufferHeight = 768;
+            _graphics.PreferredBackBufferWidth = 1920;
+            _graphics.PreferredBackBufferHeight = 1080;
             _graphics.IsFullScreen = true;
             _graphics.ApplyChanges();
 
@@ -52,17 +55,15 @@ namespace EscapeWok
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            
+
             // TODO: use this.Content to load your game content here
+            SwitchGameState(new SplashState());
         }
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
             // TODO: Add your update logic here
-
+            _currentGameState.HandleInput();
             base.Update(gameTime);
         }
 
@@ -72,7 +73,7 @@ namespace EscapeWok
             GraphicsDevice.SetRenderTarget(_renderTarget);
             GraphicsDevice.Clear(Color.CornflowerBlue);
             _spriteBatch.Begin();
-            //_currentGameState.Render(_spriteBatch);
+            _currentGameState?.Render(_spriteBatch);
             _spriteBatch.End();
             // Now render the scaled content
             _graphics.GraphicsDevice.SetRenderTarget(null);
@@ -106,5 +107,47 @@ namespace EscapeWok
             }
             return scaleRectangle;
         }
+
+        private void SwitchGameState(BaseGameState gameState)
+        {
+            if (_currentGameState != null)
+            {
+                _currentGameState.OnStateSwitched -= CurrentGameState_OnStateSwitched;
+                _currentGameState.OnEventNotification -= _currentGameState_OnEventNotification;
+                _currentGameState.UnloadContent(Content);
+            }
+
+            _currentGameState = gameState;
+
+            _currentGameState.LoadContent(Content);
+
+            _currentGameState.OnStateSwitched += CurrentGameState_OnStateSwitched;
+            _currentGameState.OnEventNotification += _currentGameState_OnEventNotification;
+        }
+
+        private void _currentGameState_OnEventNotification(object sender, Enum.Events e)
+        {
+            switch (e)
+            {
+                case Events.GAME_QUIT:
+                    Exit();
+                    break;
+            }
+        }
+
+        private void CurrentGameState_OnStateSwitched(object sender, BaseGameState e)
+        {
+            SwitchGameState(e);
+        }
+
+
+        /// <summary>
+        /// UnloadContent will be called once per game and is the place to unload
+        /// game-specific content.
+        /// </summary>
+        protected override void UnloadContent()
+        {
+            _currentGameState?.UnloadContent(Content);
+        }       
     }
 }

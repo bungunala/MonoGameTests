@@ -1,4 +1,5 @@
-﻿using EscapeWok.States.Base;
+﻿using EscapeWok.Objects;
+using EscapeWok.States.Base;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -16,7 +17,7 @@ namespace EscapeWok.States
 
         public override void LoadContent(ContentManager contentManager)
         {
-            //AddGameObject(new SplashImage(contentManager.Load<Texture2D>("Barren")));
+            AddGameObject(new SplashImage(contentManager.Load<Texture2D>(@"gfx/splash")));
         }
 
         public override void UnloadContent(ContentManager contentManager)

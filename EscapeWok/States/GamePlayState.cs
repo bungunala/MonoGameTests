@@ -9,7 +9,7 @@ namespace EscapeWok.States
     {
         public override void HandleInput()
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Enter))
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 SwitchState(new GameplayState());
         }
 

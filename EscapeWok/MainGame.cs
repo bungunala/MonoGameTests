@@ -17,8 +17,8 @@ namespace EscapeWok
 
         private BaseGameState _currentGameState;
 
-        private const int DESIGNED_RESOLUTION_WIDTH = 1920;
-        private const int DESIGNED_RESOLUTION_HEIGHT = 1080;
+        private const int DESIGNED_RESOLUTION_WIDTH = 800;
+        private const int DESIGNED_RESOLUTION_HEIGHT = 600;
         private const float DESIGNED_RESOLUTION_ASPECT_RATIO = DESIGNED_RESOLUTION_WIDTH / (float)DESIGNED_RESOLUTION_HEIGHT;
 
         public MainGame()
@@ -32,8 +32,8 @@ namespace EscapeWok
         {
             // TODO: Add your initialization logic here            
 
-            _graphics.PreferredBackBufferWidth = 1920;
-            _graphics.PreferredBackBufferHeight = 1080;
+            _graphics.PreferredBackBufferWidth = 1024;
+            _graphics.PreferredBackBufferHeight = 768;
             _graphics.IsFullScreen = true;
             _graphics.ApplyChanges();
 

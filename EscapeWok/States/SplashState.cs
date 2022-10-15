@@ -17,12 +17,9 @@ namespace EscapeWok.States
 
         public override void LoadContent(ContentManager contentManager)
         {
-            AddGameObject(new SplashImage(contentManager.Load<Texture2D>(@"gfx/splash")));
+            AddGameObject(new SplashImage(LoadTexture(@"gfx/splash")));
         }
 
-        public override void UnloadContent(ContentManager contentManager)
-        {
-            contentManager.Unload();
-        }
+       
     }
 }

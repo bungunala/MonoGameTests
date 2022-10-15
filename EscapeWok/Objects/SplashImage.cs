@@ -10,9 +10,9 @@ namespace EscapeWok.Objects
 {
     internal class SplashImage:BaseGameObject
     {
-        public SplashImage(Texture2D _tex)
+        public SplashImage(Texture2D texture)
         {
-            _texture = _tex;            
+            _texture = texture;            
         }
     }
 }

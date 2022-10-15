@@ -11,11 +11,18 @@ namespace EscapeWok.States.Base
     public abstract class BaseGameState
     {
         private readonly List<BaseGameObject> _gameObjects = new List<BaseGameObject>();
+        
         public event EventHandler<BaseGameState> OnStateSwitched;
         public event EventHandler<Events> OnEventNotification;
 
+        private const string FallBackTexture = "Empty";
+        private ContentManager _contentManager;
+
         public abstract void LoadContent(ContentManager contentManager);
-        public abstract void UnloadContent(ContentManager contentManager);
+        public void UnloadContent(ContentManager contentManager)
+        {
+            _contentManager.Unload();
+        }
         public abstract void HandleInput();
         protected void SwitchState(BaseGameState baseGameState)
         {
@@ -39,6 +46,15 @@ namespace EscapeWok.States.Base
             {
                 gameObject.Render(spriteBatch);
             }
+        }
+        public void Initialize(ContentManager contentManager)
+        {
+            _contentManager = contentManager;
+        }
+        protected Texture2D LoadTexture(string textureName)
+        {
+            var texture = _contentManager.Load<Texture2D>(textureName);
+            return texture?? _contentManager.Load<Texture2D>(FallBackTexture);
         }
     }
 }

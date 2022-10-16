@@ -1,5 +1,7 @@
 ﻿using EscapeWok.Enum;
+using EscapeWok.Managers.Input.Base;
 using EscapeWok.Objects.Base;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -17,13 +19,21 @@ namespace EscapeWok.States.Base
 
         private const string FallBackTexture = "Empty";
         private ContentManager _contentManager;
+        protected int _viewportWidth;
+        protected int _viewportHeight;
+
+        protected InputManager InputManager { get; set; }
+
+        
 
         public abstract void LoadContent(ContentManager contentManager);
         public void UnloadContent(ContentManager contentManager)
         {
             _contentManager.Unload();
         }
-        public abstract void HandleInput();
+        public abstract void HandleInput(GameTime gametime);
+
+        public virtual void Update(GameTime gameTime) { }
         protected void SwitchState(BaseGameState baseGameState)
         {
             OnStateSwitched?.Invoke(this, baseGameState);
@@ -40,6 +50,10 @@ namespace EscapeWok.States.Base
         {
             _gameObjects.Add(gameObject);
         }
+        protected void RemoveGameObject(BaseGameObject gameObject)
+        {
+            _gameObjects.Remove(gameObject);
+        }
         public void Render(SpriteBatch spriteBatch)
         {
             foreach (var gameObject in _gameObjects.OrderBy(a=>a.zIndex))
@@ -47,14 +61,20 @@ namespace EscapeWok.States.Base
                 gameObject.Render(spriteBatch);
             }
         }
-        public void Initialize(ContentManager contentManager)
+        public void Initialize(ContentManager contentManager, int viewportWidth, int viewportHeight)
         {
             _contentManager = contentManager;
+            _viewportHeight = viewportHeight;
+            _viewportWidth = viewportWidth;
+
+            SetInputManager();
         }
         protected Texture2D LoadTexture(string textureName)
         {
             var texture = _contentManager.Load<Texture2D>(textureName);
             return texture?? _contentManager.Load<Texture2D>(FallBackTexture);
         }
+
+        protected abstract void SetInputManager();
     }
 }

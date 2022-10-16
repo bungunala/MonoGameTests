@@ -63,7 +63,8 @@ namespace EscapeWok
         protected override void Update(GameTime gameTime)
         {
             // TODO: Add your update logic here
-            _currentGameState.HandleInput();
+            _currentGameState.HandleInput(gameTime);
+            _currentGameState.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -112,7 +113,7 @@ namespace EscapeWok
         {
             _currentGameState?.UnloadContent(Content);
             _currentGameState = gameState;
-            _currentGameState.Initialize(Content);
+            _currentGameState.Initialize(Content, _spriteBatch.GraphicsDevice.Viewport.Width, _spriteBatch.GraphicsDevice.Viewport.Height);
             _currentGameState.LoadContent(Content);
             _currentGameState.OnStateSwitched += CurrentGameState_OnStateSwitched;
             _currentGameState.OnEventNotification += _currentGameState_OnEventNotification;

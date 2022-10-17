@@ -73,3 +73,39 @@
 /processorParam:TextureFormat=Color
 /build:gfx/splash.png
 
+#begin music/FutureAmbient_1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:music/FutureAmbient_1.wav
+
+#begin music/FutureAmbient_2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:music/FutureAmbient_2.wav
+
+#begin music/FutureAmbient_3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:music/FutureAmbient_3.wav
+
+#begin music/FutureAmbient_4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:music/FutureAmbient_4.wav
+
+#begin sounds/bullet.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/bullet.wav
+
+#begin sounds/empty.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/empty.wav
+

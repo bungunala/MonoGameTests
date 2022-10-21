@@ -30,6 +30,11 @@ namespace EscapeWok.States.Splash
             AddGameObject(new SplashImage(LoadTexture(SplashScreen)));
         }
 
+        public override void UpdateGameState(GameTime gametime)
+        {
+            //throw new System.NotImplementedException();
+        }
+
         protected override void SetInputManager()
         {
             InputManager = new InputManager(new SplashInputMapper());

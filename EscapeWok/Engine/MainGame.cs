@@ -62,8 +62,7 @@ namespace EscapeWok.Engine
 
         protected override void Update(GameTime gameTime)
         {
-            // TODO: Add your update logic here
-            _currentGameState.HandleInput(gameTime);
+            // TODO: Add your update logic here            
             _currentGameState.Update(gameTime);
             base.Update(gameTime);
         }
@@ -115,7 +114,7 @@ namespace EscapeWok.Engine
             _currentGameState = gameState;
             _currentGameState.Initialize(Content, _spriteBatch.GraphicsDevice.Viewport.Width, _spriteBatch.GraphicsDevice.Viewport.Height);
             _currentGameState.LoadContent();
-            _currentGameState.OnStateSwitched += CurrentGameState_OnStateSwitched;
+            _currentGameState.OnStateSwitched += _currentGameState_OnStateSwitched;
             _currentGameState.OnEventNotification += _currentGameState_OnEventNotification;
         }
 
@@ -123,13 +122,13 @@ namespace EscapeWok.Engine
         {
             switch (e)
             {
-                case BaseGameStateEvent.GameQuit _:
+                case BaseGameStateEvent.GameQuit:
                     Exit();
-                    break;
+                    break;                
             }
         }
 
-        private void CurrentGameState_OnStateSwitched(object sender, BaseGameState e)
+        private void _currentGameState_OnStateSwitched(object sender, BaseGameState e)
         {
             SwitchGameState(e);
         }
